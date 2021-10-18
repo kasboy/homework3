@@ -4,6 +4,7 @@ import pytest
 
 from tests.test_dog_ceo.test_data.test_data import breeds
 
+TEST_DIR_PATH = './test_dog_ceo/download_images'
 
 @pytest.mark.parametrize("image_count", [1, 3, 10, 25, 50])
 def test_get_multiple_random_images(base_url, image_count, request_method):
@@ -61,7 +62,7 @@ def test_check_items_in_list_all_breeds(get_dict_all_breeds):
 
 
 def test_check_all_items_in_dict_all_breeds(get_dict_all_breeds):
-    with open("./test_data/list_all_breeds.json", "r") as json_file:
+    with open("./test_dog_ceo/test_data/list_all_breeds.json", "r") as json_file:
         dict_all_breeds_expected = json.loads(json_file.read())
 
     # Сравниваем 2 словаря (элементы в словарях могут располагаться в разной последовательности)
@@ -75,7 +76,7 @@ def test_get_breed_image_from_breed_list(base_url, request_method, get_breed_fro
     image_url = response.json()['message']
     response_image = request_method(url=image_url, stream=True)
 
-    with open(f"./download_images/image_"
+    with open(f"{TEST_DIR_PATH}/image_"
               f"{''.join(c if c != '/' else '_' for c in get_breed_from_list)}.jpg", "wb") as f:
         for chunk in response_image.iter_content(chunk_size=128):
             f.write(chunk)
@@ -96,7 +97,7 @@ def test_get_breed_image_from_breed_list_2(base_url, request_method, breed_name)
     image_url = response.json()['message']
     response_image = request_method(url=image_url, stream=True)
 
-    with open(f"./download_images/image_"
+    with open(f"{TEST_DIR_PATH}/image_"
               f"{''.join(c if c != '/' else '_' for c in breed_name)}.jpg", "wb") as f:
         for chunk in response_image.iter_content(chunk_size=128):
             f.write(chunk)

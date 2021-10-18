@@ -25,8 +25,3 @@ def base_url(request):
 @pytest.fixture
 def request_method(request):
     return getattr(requests, request.config.getoption("--method"))
-
-
-@pytest.fixture
-def get_list_all_breeds():
-    pass

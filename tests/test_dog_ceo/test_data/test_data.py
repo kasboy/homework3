@@ -4,7 +4,7 @@ import json
 def get_breeds():
     breeds_list = []
     i = 0
-    with open("./test_data/list_all_breeds.json", "r") as json_file:
+    with open("./test_dog_ceo/test_data/list_all_breeds.json", "r") as json_file:
         breeds_dict = json.loads(json_file.read())
         for key, value in breeds_dict.items():
             if len(value) > 0:
