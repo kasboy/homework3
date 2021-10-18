@@ -3,6 +3,31 @@ import pytest
 from tests.test_dog_ceo.test_data.test_data import breeds
 
 
+def pytest_addoption(parser):
+    parser.addoption(
+        "--url",
+        default="https://dog.ceo/",
+        help="This is request url"
+    )
+
+    parser.addoption(
+        "--method",
+        default="get",
+        choices=["get", "post", "put", "patch", "delete"],
+        help="method to execute"
+    )
+
+
+@pytest.fixture
+def base_url(request):
+    return request.config.getoption("--url")
+
+
+@pytest.fixture
+def request_method(request):
+    return getattr(requests, request.config.getoption("--method"))
+
+
 @pytest.fixture
 def get_dict_all_breeds(base_url, request_method):
     target = base_url + "api/breeds/list/all"
