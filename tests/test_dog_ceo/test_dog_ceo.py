@@ -28,7 +28,8 @@ def test_check_all_main_breeds_count(base_url, request_method, get_dict_all_bree
 
     assert response.status_code == 200
     assert get_dict_all_breeds['status'] == "success"
-    assert len(get_dict_all_breeds['message']) == 94
+    assert len(get_dict_all_breeds['message']) == 95
+
 
 
 @pytest.mark.skip("Оставил это для примера, сделал более короткий"
@@ -71,7 +72,6 @@ def test_check_all_items_in_dict_all_breeds(get_dict_all_breeds):
 
 def test_get_breed_image_from_breed_list(base_url, request_method, get_breed_from_list):
     target = base_url + f"api/breed/{get_breed_from_list}/images/random"
-    print(f"target = {target}")
     response = request_method(url=target)
     image_url = response.json()['message']
     response_image = request_method(url=image_url, stream=True)
@@ -85,14 +85,15 @@ def test_get_breed_image_from_breed_list(base_url, request_method, get_breed_fro
     assert response_image.status_code == 200
 
 
-# Вот так почему-то не работает параметризация, хотя 'breeds' - генератор. Брал это из примера
+# Тест оставил для примера параметризации тестовой функции параметрами из генератора.
+# В данном случае работать не будет, т.к. 'breeds' - генератор, который уже переполнился
+# (используется в тесте test_get_breed_image_from_breed_list). Брал это из примера
 # тут: https://github.com/konflic/python_qa_ddt/blob/master/parametrization/test_param_gen.py
-@pytest.mark.skip("Такой тест не работает, в 'breed_name' попадает пустой параметр")
+@pytest.mark.skip("Такой тест не работает, в 'breed_name' попадает пустой параметр, так как в"
+                  " генераторе срабатывает stop iteration. Оставлен для примера.")
 @pytest.mark.parametrize("breed_name", breeds)
 def test_get_breed_image_from_breed_list_2(base_url, request_method, breed_name):
-    # print(f"breed_name = {breed_name}")
     target = base_url + f"api/breed/{breed_name}/images/random"
-    # print(f"target = {target}")
     response = request_method(url=target)
     image_url = response.json()['message']
     response_image = request_method(url=image_url, stream=True)

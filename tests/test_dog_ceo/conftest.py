@@ -1,4 +1,5 @@
 import pytest
+import requests
 
 from tests.test_dog_ceo.test_data.test_data import breeds
 
@@ -36,12 +37,10 @@ def get_dict_all_breeds(base_url, request_method):
     return dict_all_breeds
 
 
-# Пример использования параметров из файла ('breeds' - генератор)
+# Пример использования параметризаци фикстуры ('breeds' - генератор)
 @pytest.fixture(params=breeds)
 def get_breed_from_list(request):
-    print(f"request.param = {request.param}")
     return request.param
-
 
 # # Пример использования параметризации фикстуры списком значений
 # @pytest.fixture(params=['affenpinscher', 'african', 'airedale', 'akita', 'appenzeller',
