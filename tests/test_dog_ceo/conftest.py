@@ -37,7 +37,7 @@ def get_dict_all_breeds(base_url, request_method):
     return dict_all_breeds
 
 
-# Пример использования параметризаци фикстуры ('breeds' - генератор)
+# Пример использования параметризации фикстуры ('breeds' - генератор)
 @pytest.fixture(params=breeds)
 def get_breed_from_list(request):
     return request.param
