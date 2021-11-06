@@ -84,7 +84,8 @@ def test_get_list_breweries_filtered_by_name_negative(base_url, request_method, 
 
 @pytest.mark.parametrize("id_", ids)
 def test_api_json_schema_cerberus(base_url, request_method, id_):
-    """Проверка структуры ответа за запрос breweries/{id_}}"""
+    """Проверка структуры ответа на запрос breweries/{id_} с использованием 'cerberus'"""
+
     target = base_url + f"breweries/{id_}"
     response = request_method(url=target)
     # print(f"\nresponse = {response.json()}")
@@ -121,7 +122,8 @@ def test_api_json_schema_cerberus(base_url, request_method, id_):
 @pytest.mark.skip("Пример использования проверки json-схему через 'jsonschema'")
 @pytest.mark.parametrize("id_", ids)
 def test_api_json_schema_jsonschema(base_url, request_method, id_):
-    """Проверка структуры ответа за запрос breweries/{id_}"""
+    """Проверка структуры ответа yа запрос breweries/{id_} с использованием 'jsonschema'"""
+
     target = base_url + f"breweries/{id_}"
     response = request_method(url=target)
     # print(f"\nresponse = {response.json()}")
@@ -192,6 +194,8 @@ def test_api_json_schema_jsonschema(base_url, request_method, id_):
     }
 
     def validate_with_datetime(schema, instance):
+        """Add datetime validation to standard jsonschema validator"""
+
         BaseVal = jsonschema.Draft7Validator
 
         # Build a new type checker
