@@ -1,9 +1,32 @@
-from datetime import datetime
+"""
+Програма для расчета по ДЗ №3
+Версия 1.0
+Автор: Андрей Корниенко
 
+Домашнее задание
+Тестирование API
+
+Цель:
+Поучиться тестировать API сервисов на основе их документации.
+
+Тестирование каждого api оформить в отдельном тестовом модуле.
+
+Тестирование REST сервиса 3.
+Написать минимум 5 тестов для REST API сервиса: https://jsonplaceholder.typicode.com/.
+Как минимум 2 из 5 должны использовать параметризацию.
+Документация к API есть на сайте.
+Тесты должны успешно проходить.
+
+Критерии оценки:
+Все перечисленные пункты сдавать одним pull-request'ом
+Для всех файлов соблюдается минимальный код сатйл (встроенный форматтер PyCharm'а)
+Под тесты каждого сервиса заведён отдельный файл
+Рекомендуем сдать до: 28.07.2021"""
+
+from datetime import datetime
 import pytest
 import cerberus
 import jsonschema
-
 # export PYTHONPATH="/Users/Andrey/Develop/homework3/tests"
 from test_openbrewerydb_org.test_data.test_data import ids, cities
 
