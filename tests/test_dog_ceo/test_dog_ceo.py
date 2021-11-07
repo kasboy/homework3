@@ -6,30 +6,30 @@ from tests.test_dog_ceo.test_data.test_data import breeds
 
 TEST_DIR_PATH = './test_dog_ceo/download_images'
 
+
 @pytest.mark.parametrize("image_count", [1, 3, 10, 25, 50])
-def test_get_multiple_random_images(base_url, image_count, request_method):
+def test_get_multiple_random_images(base_url, image_count, http_method_get):
     target = base_url + f"api/breeds/image/random/{image_count}"
-    response = request_method(url=target)
+    response = http_method_get(url=target)
     assert len(response.json()['message']) == image_count
 
 
 @pytest.mark.parametrize("image_count", [-1, 0, 51])
-def test_get_multiple_random_images_negative(base_url, image_count, request_method):
+def test_get_multiple_random_images_negative(base_url, image_count, http_method_get):
     target = base_url + f"api/breeds/image/random/{image_count}"
-    response = request_method(url=target)
+    response = http_method_get(url=target)
 
     with pytest.raises(AssertionError):
         assert len(response.json()['message']) == image_count
 
 
-def test_check_all_main_breeds_count(base_url, request_method, get_dict_all_breeds):
+def test_check_all_main_breeds_count(base_url, http_method_get, get_dict_all_breeds):
     target = base_url + "api/breeds/list/all"
-    response = request_method(url=target)
+    response = http_method_get(url=target)
 
     assert response.status_code == 200
     assert get_dict_all_breeds['status'] == "success"
     assert len(get_dict_all_breeds['message']) == 95
-
 
 
 @pytest.mark.skip("Оставил это для примера, сделал более короткий"
@@ -70,11 +70,11 @@ def test_check_all_items_in_dict_all_breeds(get_dict_all_breeds):
     assert get_dict_all_breeds['message'] == dict_all_breeds_expected
 
 
-def test_get_breed_image_from_breed_list(base_url, request_method, get_breed_from_list):
+def test_get_breed_image_from_breed_list(base_url, http_method_get, get_breed_from_list):
     target = base_url + f"api/breed/{get_breed_from_list}/images/random"
-    response = request_method(url=target)
+    response = http_method_get(url=target)
     image_url = response.json()['message']
-    response_image = request_method(url=image_url, stream=True)
+    response_image = http_method_get(url=image_url, stream=True)
 
     with open(f"{TEST_DIR_PATH}/image_"
               f"{''.join(c if c != '/' else '_' for c in get_breed_from_list)}.jpg", "wb") as f:
@@ -92,11 +92,11 @@ def test_get_breed_image_from_breed_list(base_url, request_method, get_breed_fro
 @pytest.mark.skip("Такой тест не работает, в 'breed_name' попадает пустой параметр, так как в"
                   " генераторе срабатывает stop iteration. Оставлен для примера.")
 @pytest.mark.parametrize("breed_name", breeds)
-def test_get_breed_image_from_breed_list_2(base_url, request_method, breed_name):
+def test_get_breed_image_from_breed_list_2(base_url, http_method_get, breed_name):
     target = base_url + f"api/breed/{breed_name}/images/random"
-    response = request_method(url=target)
+    response = http_method_get(url=target)
     image_url = response.json()['message']
-    response_image = request_method(url=image_url, stream=True)
+    response_image = http_method_get(url=image_url, stream=True)
 
     with open(f"{TEST_DIR_PATH}/image_"
               f"{''.join(c if c != '/' else '_' for c in breed_name)}.jpg", "wb") as f:
@@ -107,11 +107,11 @@ def test_get_breed_image_from_breed_list_2(base_url, request_method, breed_name)
     assert response_image.status_code == 200
 
 
-def test_display_single_random_image(base_url, request_method):
+def test_display_single_random_image(base_url, http_method_get):
     target = base_url + "api/breeds/image/random"
-    response = request_method(url=target)
+    response = http_method_get(url=target)
     random_image_url = response.json()['message']
-    response_random_image = request_method(url=random_image_url)
+    response_random_image = http_method_get(url=random_image_url)
 
     assert response.status_code == 200
     assert response_random_image.status_code == 200

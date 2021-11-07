@@ -5,7 +5,7 @@ import requests
 def pytest_addoption(parser):
     parser.addoption(
         "--url",
-        default="https://dog.ceo/",
+        default="https://ya.ru/",
         help="This is request url"
     )
 
@@ -25,3 +25,8 @@ def base_url(request):
 @pytest.fixture
 def request_method(request):
     return getattr(requests, request.config.getoption("--method"))
+
+
+@pytest.fixture
+def http_method_get():
+    return getattr(requests, "get")

@@ -18,6 +18,3 @@ def get_breeds():
 
 # Генератор
 breeds = get_breeds()
-
-# for breed in breeds:
-#     print(f"breed={breed}")

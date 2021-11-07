@@ -1,38 +1,17 @@
 import pytest
-import requests
 
 from tests.test_dog_ceo.test_data.test_data import breeds
 
 
-def pytest_addoption(parser):
-    parser.addoption(
-        "--url",
-        default="https://dog.ceo/",
-        help="This is request url"
-    )
-
-    parser.addoption(
-        "--method",
-        default="get",
-        choices=["get", "post", "put", "patch", "delete"],
-        help="method to execute"
-    )
+@pytest.fixture
+def base_url():
+    return "https://dog.ceo/"
 
 
 @pytest.fixture
-def base_url(request):
-    return request.config.getoption("--url")
-
-
-@pytest.fixture
-def request_method(request):
-    return getattr(requests, request.config.getoption("--method"))
-
-
-@pytest.fixture
-def get_dict_all_breeds(base_url, request_method):
+def get_dict_all_breeds(base_url, http_method_get):
     target = base_url + "api/breeds/list/all"
-    response = request_method(url=target)
+    response = http_method_get(url=target)
     dict_all_breeds = response.json()
     return dict_all_breeds
 
@@ -42,7 +21,7 @@ def get_dict_all_breeds(base_url, request_method):
 def get_breed_from_list(request):
     return request.param
 
-# # Пример использования параметризации фикстуры списком значений
+# # Пример использования параметризации фикстуры списком значений (оставил для примера)
 # @pytest.fixture(params=['affenpinscher', 'african', 'airedale', 'akita', 'appenzeller',
 #                         'australian', 'basenji', 'beagle', 'bluetick', 'borzoi', 'bouvier',
 #                         'boxer', 'brabancon', 'briard', 'buhund', 'bulldog', 'bullterrier',

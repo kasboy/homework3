@@ -1,7 +1,9 @@
 import json
 
+
 def get_json_file_list_of_breweries_list():
-    with open("./test_data/list_of_breweries.json", "r") as json_file:
+    # export PYTHONPATH="/Users/Andrey/Develop/homework3/tests"
+    with open("./test_openbrewerydb_org/test_data/list_of_breweries.json", "r") as json_file:
         breweries_list = json.loads(json_file.read())
         return breweries_list
 
@@ -17,6 +19,7 @@ def get_brewerie_cities_from_json():
     for element in unique_breweries_list:
         yield element
 
+
 def get_brewerie_id_from_json():
     breweries_list = get_json_file_list_of_breweries_list()
 
@@ -26,15 +29,9 @@ def get_brewerie_id_from_json():
 
 # Генератор
 cities = get_brewerie_cities_from_json()
-# for city in cities:
-#     print(f"\ncity = {city}")
-
 
 # Генератор
 ids = get_brewerie_id_from_json()
-# for id_ in ids:
-#     print(f"\nid = {id_}")
-
 
 # Десериализованный Json-файл
 json_file_list_of_breweries_list = get_json_file_list_of_breweries_list()

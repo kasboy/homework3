@@ -1,34 +1,12 @@
 import pytest
-import requests
 
-
-# export PYTHONPATH="/Users/Andrey/Develop/homework3/tests/test_openbrewerydb_org"
-from test_data.test_data import json_file_list_of_breweries_list
-
-
-def pytest_addoption(parser):
-    parser.addoption(
-        "--url",
-        default="https://api.openbrewerydb.org/",
-        help="This is request url"
-    )
-
-    parser.addoption(
-        "--method",
-        default="get",
-        choices=["get", "post", "put", "patch", "delete"],
-        help="method to execute"
-    )
+# export PYTHONPATH="/Users/Andrey/Develop/homework3/tests"
+from test_openbrewerydb_org.test_data.test_data import json_file_list_of_breweries_list
 
 
 @pytest.fixture
-def base_url(request):
-    return request.config.getoption("--url")
-
-
-@pytest.fixture
-def request_method(request):
-    return getattr(requests, request.config.getoption("--method"))
+def base_url():
+    return "https://api.openbrewerydb.org/"
 
 
 @pytest.fixture
