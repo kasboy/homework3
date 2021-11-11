@@ -1,7 +1,8 @@
 import pytest
 
-# export PYTHONPATH="/Users/Andrey/Develop/homework3/tests"
-from test_jsonplaceholder_typicode_com.test_data.test_data import json_file_list_all_resources, element_from_list
+# export PYTHONPATH="/Users/Andrey/Develop/homework3/"
+from tests.test_jsonplaceholder_typicode_com.test_data.test_data \
+    import json_file_list_all_resources, element_from_list
 
 
 @pytest.fixture

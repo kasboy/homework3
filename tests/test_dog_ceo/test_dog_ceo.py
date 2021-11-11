@@ -26,9 +26,14 @@
 import json
 import collections
 import pytest
-from tests.test_dog_ceo.test_data.test_data import breeds
 
-TEST_DIR_PATH = './test_dog_ceo/download_images'
+# export PYTHONPATH="/Users/Andrey/Develop/homework3/"
+from tests.test_dog_ceo.test_data.test_data import breeds
+from pathlib import Path
+
+CUR_DIR = Path(__file__).parent
+TEST_DIR_PATH = f'{CUR_DIR}/download_images'
+print(f'TEST_DIR_PATH = {TEST_DIR_PATH}')
 
 
 @pytest.mark.parametrize("image_count", [1, 3, 10, 25, 50])
@@ -87,7 +92,7 @@ def test_check_items_in_list_all_breeds(get_dict_all_breeds):
 
 
 def test_check_all_items_in_dict_all_breeds(get_dict_all_breeds):
-    with open("./test_dog_ceo/test_data/list_all_breeds.json", "r") as json_file:
+    with open(f"{CUR_DIR}/test_data/list_all_breeds.json", "r") as json_file:
         dict_all_breeds_expected = json.loads(json_file.read())
 
     # Сравниваем 2 словаря (элементы в словарях могут располагаться в разной последовательности)

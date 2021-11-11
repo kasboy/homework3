@@ -1,9 +1,12 @@
 import json
+from pathlib import Path
 
+
+CUR_DIR = Path(__file__).parent
 
 def get_breeds():
     breeds_list = []
-    with open("./test_dog_ceo/test_data/list_all_breeds.json", "r") as json_file:
+    with open(f"{CUR_DIR}/list_all_breeds.json", "r") as json_file:
         breeds_dict = json.loads(json_file.read())
         for key, value in breeds_dict.items():
             if len(value) > 0:

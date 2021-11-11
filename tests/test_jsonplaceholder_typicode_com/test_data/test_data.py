@@ -1,8 +1,11 @@
 import json
+from pathlib import Path
 
+
+CUR_DIR = Path(__file__).parent
 
 def get_list_all_resources_from_json_file():
-    with open("./test_jsonplaceholder_typicode_com/test_data/list_all_resources.json", "r") as json_file:
+    with open(f"{CUR_DIR}/list_all_resources.json", "r") as json_file:
         resources_list = json.loads(json_file.read())
         return resources_list
 

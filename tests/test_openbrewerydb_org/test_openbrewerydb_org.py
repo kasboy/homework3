@@ -27,8 +27,9 @@ from datetime import datetime
 import pytest
 import cerberus
 import jsonschema
-# export PYTHONPATH="/Users/Andrey/Develop/homework3/tests"
-from test_openbrewerydb_org.test_data.test_data import ids, cities
+
+# export PYTHONPATH="/Users/Andrey/Develop/homework3/"
+from tests.test_openbrewerydb_org.test_data.test_data import ids, cities
 
 
 def test_get_list_breweries(base_url, http_method_get):
@@ -93,7 +94,7 @@ def test_get_list_breweries_filtered_by_name(base_url, http_method_get, name):
 
 
 @pytest.mark.parametrize("type_", ["micro", "nano", "regional", "brewpub", "large", "planning",
-                                   "bar", "contract", "proprieter", "closed"])
+                                   "bar", "contract", "closed"])
 def test_get_list_breweries_filtered_by_type(base_url, http_method_get, type_):
     target = base_url + f"breweries?by_type={type_}"
     response = http_method_get(url=target)

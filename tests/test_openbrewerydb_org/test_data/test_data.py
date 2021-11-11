@@ -1,9 +1,11 @@
 import json
+from pathlib import Path
 
+
+CUR_DIR = Path(__file__).parent
 
 def get_json_file_list_of_breweries_list():
-    # export PYTHONPATH="/Users/Andrey/Develop/homework3/tests"
-    with open("./test_openbrewerydb_org/test_data/list_of_breweries.json", "r") as json_file:
+    with open(f"{CUR_DIR}/list_of_breweries.json", "r") as json_file:
         breweries_list = json.loads(json_file.read())
         return breweries_list
 

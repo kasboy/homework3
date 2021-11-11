@@ -1,5 +1,6 @@
 import pytest
 
+# export PYTHONPATH="/Users/Andrey/Develop/homework3/"
 from tests.test_dog_ceo.test_data.test_data import breeds
 
 
@@ -17,7 +18,7 @@ def get_dict_all_breeds(base_url, http_method_get):
 
 
 # Пример использования параметризации фикстуры ('breeds' - генератор)
-@pytest.fixture(params=breeds)
+@pytest.fixture(params=breeds, scope='session')
 def get_breed_from_list(request):
     return request.param
 

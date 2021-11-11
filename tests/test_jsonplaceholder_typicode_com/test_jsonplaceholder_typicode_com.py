@@ -26,8 +26,9 @@
 import requests
 import pytest
 from jsonschema import validate
-# export PYTHONPATH="/Users/Andrey/Develop/homework3/tests"
-from test_jsonplaceholder_typicode_com.test_data.test_data import ids, userIds
+
+# export PYTHONPATH="/Users/Andrey/Develop/homework3/"
+from tests.test_jsonplaceholder_typicode_com.test_data.test_data import ids, userIds
 
 
 def test_get_a_resource(base_url, http_method_get):
