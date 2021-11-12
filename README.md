@@ -4,7 +4,7 @@ Repository for homework3
 Before run tests: 
    
     1. Export env variable:
-    export PYTHONPATH="/Users/Andrey/Develop/homework3/
+    export PYTHONPATH="/Users/Andrey/Develop/homework3/"
 
     2. Run tests
     pytest -vs tests/

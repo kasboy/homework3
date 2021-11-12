@@ -26,6 +26,7 @@
 import json
 import collections
 import pytest
+import os
 
 # export PYTHONPATH="/Users/Andrey/Develop/homework3/"
 from tests.test_dog_ceo.test_data.test_data import breeds
@@ -33,7 +34,12 @@ from pathlib import Path
 
 CUR_DIR = Path(__file__).parent
 TEST_DIR_PATH = f'{CUR_DIR}/download_images'
-print(f'TEST_DIR_PATH = {TEST_DIR_PATH}')
+
+# Check whether the specified TEST_DIR_PATH exists or not
+isExist = os.path.exists(TEST_DIR_PATH)
+if not isExist:
+    # Create a new directory because it does not exist
+    os.makedirs(TEST_DIR_PATH)
 
 
 @pytest.mark.parametrize("image_count", [1, 3, 10, 25, 50])
